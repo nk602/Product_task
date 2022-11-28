@@ -1,0 +1,13 @@
+{
+    "signup":[
+        {"id":1,"name":"shailesh","email":"mrshaileshgupta03@gmail.com","password":"12345678"},
+        {"id":2,"name":"sandeep","email":"mrsandeepkumar1010@gmail.com","password":"123456"},
+        {"id":3,"name":"pardeep","email":"pardeepkumar@gmail.com","password":"1234567"},
+        {"id":4,"name":"sanjay","email":"mrsanjaykumar@gmail.com","password":"12345"}
+        
+    ],
+    "comments":{},
+    "profile":{
+        "name":"shailesh"
+    }
+}

@@ -1,0 +1,118 @@
+<!-- 
+    npm install --save @ng-select/ng-select
+    npm i @ng-bootstrap/ng-bootstrap --force
+    npm install @popperjs/core
+    npm i angular-in-memory-web-api
+ -->
+
+<div class="card">
+    <h5 class="card-header text-light bg-danger">Registration Form</h5>
+    <div class="card-body">
+        <ul ngbNav #nav="ngbNav" class="nav-tabs" activeId="addtab" (navChange)="tabChange()">
+            <li ngbNavItem="addtab">
+                <a ngbNavLink>Add User</a>
+                <ng-template ngbNavContent>
+                    <form [formGroup]="addForm" (ngSubmit)="register()">
+                        <div class="row pt-3 ">
+                            <div class="row pb-3">
+
+                                <div class="form-group col-4">
+                                    <label for="">UserName</label>
+                                    <input type="text" class="form-control" formControlName="Name"
+                                        [ngClass]="{'is-invalid':submited && f['Name'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['Name'].errors">
+                                        <div *ngIf="f['Name'].errors['required']">
+                                            Name is required !!
+                                        </div>
+                                        <div *ngIf="f['Name'].errors['pattern']">
+                                            Only characters are allowed.
+                                        </div>
+                                        <div *ngIf="f['Name'].errors['maxlength']">
+                                            Name should be max 20 charactor !!
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-4">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" formControlName="emailID"
+                                        [ngClass]="{'is-invalid':submited && f['emailID'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['emailID'].errors">
+
+                                        <div *ngIf="f['emailID'].errors['required']">
+                                            Email is required !!
+                                        </div>
+                                        <div *ngIf="f['emailID'].errors['email']">
+                                            Email must be a valid email address !!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="">Mobile No</label>
+                                    <input type="text" class="form-control" formControlName="Mobile"
+                                        [ngClass]="{'is-invalid':submited && f['Mobile'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['Mobile'].errors">
+                                        <div *ngIf="f['Mobile'].errors['required']">
+                                            Mobile Number is required !!
+                                        </div>
+                                        <div *ngIf="f['Mobile'].errors['pattern']">
+                                            Only Numbers are allowed.!!
+                                        </div>
+                                        <div *ngIf="f['Mobile'].errors['minlength']">
+                                            Mobile Number should be min 10 charactor !!
+                                        </div>
+                                        <div *ngIf="f['Mobile'].errors['maxlength']">
+                                            Mobile Number should be max 10 charactor !!
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group pt-3">
+                                <button type="submit" class="btn btn-success me-2">{{buttonText}}</button>
+                                <button type="button" class="btn btn-danger mr-2" (click)="resetForm()">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+            </li>
+
+
+            <li ngbNavItem="viewtab">
+                <a ngbNavLink class="font-weight-bold">Users List</a>
+                <ng-template ngbNavContent>
+                    <div class="from-row pt-3">
+                        <div class="form-group row">
+                            <table class="table table-bordered">
+                                <tr class="">
+                                    <th>Id</th>
+                                    <th>UserName</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+
+                                </tr>
+                                <tr *ngFor="let user of users.result">
+                                    <td>{{user._id}}</td>
+                                    <td>{{user.Name}}</td>
+                                    <td>{{user.Mobile}}</td>
+                                    <td>{{user.emailID}}</td>
+
+                                    <td>
+                                        <i class="fa fa-edit text-success" (click)="edit(user._id)"></i>
+                                        <i class="fa fa-trash-o text-danger" (click)="delete(user._id)"></i>
+                                    </td>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+</div>
