@@ -10,63 +10,80 @@
     <div class="card-body">
         <ul ngbNav #nav="ngbNav" class="nav-tabs" activeId="addtab" (navChange)="tabChange()">
             <li ngbNavItem="addtab">
-                <a ngbNavLink>Add User</a>
+                <a ngbNavLink >Add User</a>
                 <ng-template ngbNavContent>
                     <form [formGroup]="addForm" (ngSubmit)="register()">
                         <div class="row pt-3 ">
                             <div class="row pb-3">
 
-                                <div class="form-group col-4">
-                                    <label for="">UserName</label>
-                                    <input type="text" class="form-control" formControlName="Name"
-                                        [ngClass]="{'is-invalid':submited && f['Name'].errors}">
-                                    <div class="invalid-feedback" *ngIf="submited && f['Name'].errors">
-                                        <div *ngIf="f['Name'].errors['required']">
+                                <div class="form-group col-3">
+                                    <label for="">ProductId</label>
+                                    <input type="text" class="form-control mt-2" formControlName="productId"
+                                        [ngClass]="{'is-invalid':submited && f['productId'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['productId'].errors">
+                                        <div *ngIf="f['productId'].errors['required']">
                                             Name is required !!
                                         </div>
-                                        <div *ngIf="f['Name'].errors['pattern']">
+                                        <!-- <div *ngIf="f['productId'].errors['pattern']">
                                             Only characters are allowed.
-                                        </div>
-                                        <div *ngIf="f['Name'].errors['maxlength']">
+                                        </div>                      -->
+                                        <div *ngIf="f['productId'].errors['maxlength']">
                                             Name should be max 20 charactor !!
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="form-group col-4">
-                                    <label for="">Email</label>
-                                    <input type="email" class="form-control" formControlName="emailID"
-                                        [ngClass]="{'is-invalid':submited && f['emailID'].errors}">
-                                    <div class="invalid-feedback" *ngIf="submited && f['emailID'].errors">
+                                <div class="form-group col-3">
+                                    <label for="">ProductName</label>
+                                    <input type="email" class="form-control mt-2" formControlName="productName"
+                                        [ngClass]="{'is-invalid':submited && f['productName'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['productName'].errors">
 
-                                        <div *ngIf="f['emailID'].errors['required']">
+                                        <div *ngIf="f['productName'].errors['required']">
                                             Email is required !!
                                         </div>
-                                        <div *ngIf="f['emailID'].errors['email']">
+                                        <div *ngIf="f['productName'].errors['email']">
                                             Email must be a valid email address !!
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group col-4">
-                                    <label for="">Mobile No</label>
-                                    <input type="text" class="form-control" formControlName="Mobile"
-                                        [ngClass]="{'is-invalid':submited && f['Mobile'].errors}">
-                                    <div class="invalid-feedback" *ngIf="submited && f['Mobile'].errors">
-                                        <div *ngIf="f['Mobile'].errors['required']">
+                               
+
+                                <div class="form-group col-3">
+                                    <label for="">CategoryId</label>
+                                    <input type="text" class="form-control mt-2" formControlName="categoryId"
+                                        [ngClass]="{'is-invalid':submited && f['categoryId'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['categoryId'].errors">
+                                        <div *ngIf="f['categoryId'].errors['required']">
                                             Mobile Number is required !!
                                         </div>
-                                        <div *ngIf="f['Mobile'].errors['pattern']">
+                                        <div *ngIf="f['categoryId'].errors['pattern']">
                                             Only Numbers are allowed.!!
                                         </div>
-                                        <div *ngIf="f['Mobile'].errors['minlength']">
+                                        <div *ngIf="f['categoryId'].errors['minlength']">
                                             Mobile Number should be min 10 charactor !!
                                         </div>
-                                        <div *ngIf="f['Mobile'].errors['maxlength']">
+                                        <div *ngIf="f['categoryId'].errors['maxlength']">
                                             Mobile Number should be max 10 charactor !!
                                         </div>
 
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label for="">CategoryName</label>
+                                    <input type="email" class="form-control mt-2" formControlName="categoryName"
+                                        [ngClass]="{'is-invalid':submited && f['categoryName'].errors}">
+                                    <div class="invalid-feedback" *ngIf="submited && f['categoryName'].errors">
+
+                                        <div *ngIf="f['categoryName'].errors['required']">
+                                            Email is required !!
+                                        </div>
+                                        <div *ngIf="f['categoryName'].errors['email']">
+                                            Email must be a valid email address !!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,18 +104,20 @@
                         <div class="form-group row">
                             <table class="table table-bordered">
                                 <tr class="">
-                                    <th>Id</th>
-                                    <th>UserName</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
+                                    <!-- <th>Id</th> -->
+                                    <th>ProductId</th>
+                                    <th>ProductName</th>
+                                    <th>CategoryId</th>
+                                    <th>CategoryName</th>
                                     <th>Action</th>
 
                                 </tr>
                                 <tr *ngFor="let user of users.result">
-                                    <td>{{user._id}}</td>
-                                    <td>{{user.Name}}</td>
-                                    <td>{{user.Mobile}}</td>
-                                    <td>{{user.emailID}}</td>
+                                    <!-- <td>{{user._id}}</td> -->
+                                    <td>{{user.productId}}</td>
+                                    <td>{{user.productName}}</td>
+                                    <td>{{user.categoryId}}</td>
+                                    <td>{{user.categoryName}}</td>
 
                                     <td>
                                         <i class="fa fa-edit text-success" (click)="edit(user._id)"></i>

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './user.interface';
 
@@ -7,7 +7,7 @@ import { User } from './user.interface';
 })
 export class UsersService {
   //  private API_BASE_PATH: string = "http://localhost:4200/api/"
-  private API_BASE_PATH =  "http://localhost:5000/user/"
+  private API_BASE_PATH =  "http://localhost:5000/product/"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,7 +24,6 @@ export class UsersService {
     return this.httpClient.put(`${this.API_BASE_PATH}${user._id}`,user)
   }
   deleteUser(userId:User) {
-  console.log(userId)
     return this.httpClient.delete(`${this.API_BASE_PATH}${userId}`)
   }
 }

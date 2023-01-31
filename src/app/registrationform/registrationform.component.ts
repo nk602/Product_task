@@ -28,10 +28,13 @@ export class RegistrationformComponent implements OnInit {
     //  this.dbops = DBOpration.submit;  //button ka name change karne ke liye
 
     this.addForm = new FormGroup({
-      id: new FormControl(0),
-      Name: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$'), Validators.minLength(3), Validators.maxLength(20)])),
-      Mobile: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')])),
-      emailID: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      id: new FormControl(null),
+      productId: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])),
+      productName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(20)])),
+      categoryId: new FormControl('', Validators.compose([Validators.required])),
+      // categoryName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')])),
+      categoryName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(20)])),
+
 
     },
     )
@@ -47,6 +50,12 @@ export class RegistrationformComponent implements OnInit {
       this.resetForm()
       this.elfile.select('viewtab')
     })
+    this.usersService.updateUser(this.addForm.value).subscribe(res => {
+      this.toster.success("User updated !!", "User Registration")
+      this.getUsers()
+      this.resetForm()
+      this.elfile.select('addtab')
+    })
 
   }
   resetForm() {
@@ -57,23 +66,19 @@ export class RegistrationformComponent implements OnInit {
     this.dbops = DBOpration.submit;  //button ka name change karne ke liye
   }
   getUsers() {
-    this.usersService.getAllUsers().subscribe(res => {  // subscribe to an observable
+    this.usersService.getAllUsers().subscribe(res => {  
       this.users = res;
-      console.log(res);
+      console.log(this.users);
     }
     );
   }
-  edit(Id: number) {
+  edit(Id:any) {
     this.buttonText = "Update"; //button ka name change karne ke liye
     this.dbops = DBOpration.update;  //button ka name change karne ke liye
-    let user = this.users.find((u:User) =>u._id === Id);
-    console.log(user)
+    let user = this.users.find((u:User) =>u._id == Id);
+    console.log()
     this.addForm.patchValue(user);
     this.elfile.select("addtab");
-
-    // this.addForm.get("password").setValue('')
-    // this.addForm.get("confirmpassword").setValue('')
-    // this.addForm.get("acceptTerms").setValue(false)
   }
   tabChange() {
     this.resetForm()
@@ -114,6 +119,7 @@ export class RegistrationformComponent implements OnInit {
     })
 
     //  })
+    console.log(Id)
 
   }
   get f() { return this.addForm.controls; }
