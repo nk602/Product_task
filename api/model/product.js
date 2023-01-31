@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   // userName:String,
-  Name: {
-    type: String,
+  productId: {
+    type: Number,
     // required: true,
     // lowercase: true,
     // trim: true,
     // minLength: 4,
     // maxLength: 30
 },
-  emailID: {
+  productName: {
     type: String,
     // required: true,
   },
@@ -22,7 +22,13 @@ const UserSchema = mongoose.Schema({
   //   // required: true,
   // },
   // phone:Number,
-  Mobile: {
+  categoryId: {
+    type:Number,
+    // required: true,
+    // minLength:10,
+    // maxLength: 12
+  },
+  categoryName: {
     type: String,
     // required: true,
     // minLength:10,

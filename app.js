@@ -14,14 +14,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
 const bodyparser = require("body-parser");
-const student = require("./api/routes/student");
-const User = require("./api/routes/user");
+// const student = require("./api/routes/student");
+const User = require("./api/routes/product");
 
 // database connection //
 const mongoose = require("mongoose");
@@ -35,20 +30,15 @@ mongoose.connection.on("err", (err) => {
 mongoose.connection.on("connected", (conncted) => {
   console.log("database is connected");
 });
-////////////////////////////////////////
 
+//data convart json form
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-//student request//
-app.use("/student", student);
-app.use("/user", User);
+//user request//
+// app.use("/student", student);
+app.use("/product", User);
 
-const cors = require('cors');
-
-app.post("/", (req, res, next) => {
-  console.log(req.body);
-});
 app.use((req, res, next) => {
   res.status(404).json({
     error: "bad request",
