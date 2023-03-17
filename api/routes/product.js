@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const User = require("../model/product");
+
+
+
 router.get("/",(req, res, next) => {
   User.find()
     .then((result) => {
@@ -18,7 +21,7 @@ router.get("/:id", (req, res, next) => {
       res.status(200).json({result });
     })
     .catch((err) => {
-      res.status(500).json({ error: err });
+      res.status(500).json({ error: err });   /////patch and 
     });
 });
 

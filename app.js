@@ -20,9 +20,14 @@ const User = require("./api/routes/product");
 
 // database connection //
 const mongoose = require("mongoose");
+
+
 mongoose.connect(
-  "mongodb+srv://Shailesh:d1zjPHekhyhgKIzS@cluster0.ine2i.mongodb.net/?retryWrites=true&w=majority"
-);
+    "mongodb://localhost:27017/productApi"
+  );
+// mongoose.connect(
+//   "mongodb+srv://Shailesh:d1zjPHekhyhgKIzS@cluster0.ine2i.mongodb.net/?retryWrites=true&w=majority"
+// );
 
 mongoose.connection.on("err", (err) => {
   console.log("database is not connected");
